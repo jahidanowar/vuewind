@@ -1,6 +1,6 @@
 {
-  "name": "vuewind",
-  "version": "0.0.1",
+  "name": "vuewindui",
+  "version": "0.0.2",
   "private": false,
   "scripts": {
     "dev": "vite",
