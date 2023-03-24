@@ -1,24 +1,35 @@
 <script setup lang="ts">
-import useSncackbar from '@/composables/snackbar'
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
+import { removeElement } from '@/utils'
 
-const { isActive, color, message, hide } = useSncackbar()
+const props = defineProps<{
+  message: string
+  snackbarType: 'success' | 'error' | 'info' | 'warning'
+  timeout?: number
+  position?: 'top' | 'bottom'
+}>()
+
+const snackbarRef = ref<HTMLElement | undefined>(undefined)
 
 const classes = computed(() => ({
-  'bg-white dark:bg-gray-800 border-green-500 ': color.value === 'success',
-  'bg-white dark:bg-gray-800 border-red-500 ': color.value === 'error',
-  'bg-white dark:bg-gray-800 border-blue-500 ': color.value === 'info',
-  'bg-white dark:bg-gray-800 border-yellow-500 ': color.value === 'warning'
+  'bg-white dark:bg-gray-800 border-green-500 text-gray-800 dark:text-white':
+    props.snackbarType === 'success',
+  'bg-white dark:bg-gray-800 border-red-500 text-gray-800 dark:text-white':
+    props.snackbarType === 'error',
+  'bg-white dark:bg-gray-800 border-blue-500 text-gray-800 dark:text-white':
+    props.snackbarType === 'info',
+  'bg-white dark:bg-gray-800 border-yellow-500 text-gray-800 dark:text-white':
+    props.snackbarType === 'warning'
 }))
 
 const handleCloseBtn = () => {
-  hide()
+  removeElement(snackbarRef?.value)
 }
 </script>
 
 <template>
-  <Transition name="slide-fade">
-    <div v-if="isActive" class="snackbar flex justify-between items-center" :class="classes">
+  <Transition name="slide-fade" ref="snackbarRef">
+    <div class="snackbar flex justify-between items-center" :class="classes">
       <div class="block">{{ message }}</div>
       <button class="snackbar__close ml-2" @click="handleCloseBtn" aria-label="Close">
         <svg

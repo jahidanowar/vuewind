@@ -4,7 +4,7 @@ import { onMounted } from 'vue'
 const props = defineProps<{
   modelValue: boolean
   position: 'left' | 'right' | 'top' | 'bottom'
-  size?: 'sm' | 'md' | 'lg' | 'full'
+  size: 'sm' | 'md' | 'lg' | 'full'
   presistant?: boolean
   title?: string
 }>()
@@ -34,7 +34,7 @@ onMounted(() => {
   <Transition :name="`fade-${position}`">
     <div
       v-if="modelValue"
-      class="fixed w-full h-screen bg-black/20 dark:bg-black/80 top-0 sheet-wrapper"
+      class="fixed w-full h-screen bg-black/20 dark:bg-black/80 top-0 left-0 z-50 sheet-wrapper"
       :class="{
         'flex justify-end': position === 'right',
         'flex justify-start': position === 'left',
