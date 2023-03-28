@@ -2,8 +2,11 @@ import type { App, Plugin } from 'vue'
 import VwSheet from './components/VwSheet.vue'
 import useSnackbar from './composables/snackbar'
 
-const VueWind: Plugin = (app: App) => {
-  app.component('VwSheet', VwSheet)
+const VueWind: Plugin = {
+  install(app: App, options) {
+    app.component('VwSheet', VwSheet)
+    console.log({ options })
+  }
 }
 
-export { VueWind, VwSheet, useSnackbar }
+export { VueWind, useSnackbar }

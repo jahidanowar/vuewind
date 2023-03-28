@@ -4,4 +4,12 @@ import App from './App.vue'
 
 import './assets/style.css'
 
-createApp(App).use(VueWind).mount('#app')
+createApp(App)
+  .use(VueWind, {
+    // options
+    a: 1,
+    b: {
+      c: 2
+    }
+  })
+  .mount('#app')

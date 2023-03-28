@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import useSncackbar from './composables/snackbar'
 
 const isSheetActive = ref(false)
